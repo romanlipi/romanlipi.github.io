@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Testing JSON</title>
+</head>
+<body>
+<button id="ip">Find My Ip</button>
+<p id="display"></p>
+<script>
+window.onload = function(){
+			var button = document.getElementById('ip');
+			button.onclick = findIp;
+			function findIp(){
+			var request = new XMLHttpRequest();
+			request.open('POST', 'ip.php', true);
+			request.setRequestHeader('Content-Type', 'application/json');
+			var wtf = request.send();
+			request.onreadystatechange = function(wtf){
+				if(request.status == 200 && request.readyState == 4){
+					var response = JSON.parse(request.responseText);
+					var dis = document.getElementById('display');
+					dis.innerHTML = 'Your IP Address is '+response.ip;
+				}
+			}
+}
+}
+</script>	
+</body>
+</html>
